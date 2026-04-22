@@ -1,0 +1,4 @@
+npm run format        # Format all files
+npm run format:check  # Check formatting (CI)
+npm run lint          # Run ESLint
+npm run lint:fix      # ESLint + auto-fix
