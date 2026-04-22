@@ -1,28 +1,35 @@
-"use client";
-
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import DotField from "@/components/DotField";
+import { LanguageToggle } from "@/components/language-toggle";
+import { getDictionary, hasLocale, type Locale } from "../dictionaries";
+import { DotFieldBackground } from "./login-form";
 
-export default function LoginPage() {
+export default async function LoginPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+
+  if (!hasLocale(lang)) {
+    notFound();
+  }
+
+  const dict = await getDictionary(lang as Locale);
+
   return (
     <div className="flex min-h-screen">
       {/* Left side - Branding with dot pattern */}
       <div className="bg-primary relative hidden w-1/2 lg:flex lg:flex-col lg:justify-center lg:p-12">
-        {/* DotField background */}
-        <div className="absolute inset-0">
-          <DotField
-            dotRadius={1}
-            dotSpacing={20}
-            gradientFrom="rgba(255,255,255,0.3)"
-            gradientTo="rgba(255,255,255,0.15)"
-          />
-        </div>
-        <div>
-          <Link href="/" className="flex items-center gap-2">
+        {/* DotField background - client component */}
+        <DotFieldBackground />
+
+        <div className="relative z-10">
+          <Link href={`/${lang}`} className="flex items-center gap-2">
             <div className="bg-primary-foreground flex h-10 w-10 items-center justify-center rounded-lg">
               <svg
                 className="text-primary h-6 w-6"
@@ -39,33 +46,36 @@ export default function LoginPage() {
               </svg>
             </div>
             <span className="text-primary-foreground text-xl font-bold">
-              SaasDash
+              {dict.common.appName}
             </span>
           </Link>
 
           <blockquote className="mt-8 space-y-2">
             <p className="text-primary-foreground/90 text-lg">
-              &ldquo;This dashboard template has saved me countless hours of
-              work and helped me deliver stunning admin panels to my clients
-              faster than ever before.&rdquo;
+              &ldquo;{dict.login.testimonial}&rdquo;
             </p>
             <footer className="text-primary-foreground/70 text-sm">
-              Abdul, Product Designer
+              {dict.login.testimonialAuthor}
             </footer>
           </blockquote>
         </div>
 
         <p className="text-primary-foreground/60 absolute bottom-12 left-12 text-sm">
-          © 2026 SaasDash. All rights reserved.
+          {dict.login.copyright}
         </p>
       </div>
 
       {/* Right side - Login form */}
-      <div className="flex w-full flex-col justify-center px-8 lg:w-1/2 lg:px-16 xl:px-24">
+      <div className="relative flex w-full flex-col justify-center px-8 lg:w-1/2 lg:px-16 xl:px-24">
+        {/* Language toggle */}
+        <div className="absolute top-6 right-6">
+          <LanguageToggle />
+        </div>
+
         <div className="mx-auto w-full max-w-sm">
           {/* Mobile logo */}
           <div className="mb-8 lg:hidden">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href={`/${lang}`} className="flex items-center gap-2">
               <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-lg">
                 <svg
                   className="text-primary-foreground h-6 w-6"
@@ -81,25 +91,25 @@ export default function LoginPage() {
                   />
                 </svg>
               </div>
-              <span className="text-xl font-bold">SaasDash</span>
+              <span className="text-xl font-bold">{dict.common.appName}</span>
             </Link>
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-2xl font-bold tracking-tight">Welcome back</h1>
-            <p className="text-muted-foreground">
-              Enter your credentials to access your account
-            </p>
+            <h1 className="text-2xl font-bold tracking-tight">
+              {dict.login.title}
+            </h1>
+            <p className="text-muted-foreground">{dict.login.subtitle}</p>
           </div>
 
           <form className="mt-8 space-y-6">
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{dict.login.email}</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="name@example.com"
+                  placeholder={dict.login.emailPlaceholder}
                   autoComplete="email"
                   required
                 />
@@ -107,18 +117,18 @@ export default function LoginPage() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{dict.login.password}</Label>
                   <Link
-                    href="/forgot-password"
+                    href={`/${lang}/forgot-password`}
                     className="text-primary text-sm font-medium hover:underline"
                   >
-                    Forgot password?
+                    {dict.login.forgotPassword}
                   </Link>
                 </div>
                 <Input
                   id="password"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder={dict.login.passwordPlaceholder}
                   autoComplete="current-password"
                   required
                 />
@@ -130,13 +140,13 @@ export default function LoginPage() {
                   htmlFor="remember"
                   className="text-muted-foreground text-sm font-normal"
                 >
-                  Remember me for 30 days
+                  {dict.login.rememberMe}
                 </Label>
               </div>
             </div>
 
             <Button type="submit" className="w-full">
-              Sign in
+              {dict.login.signIn}
             </Button>
 
             <div className="relative">
@@ -145,7 +155,7 @@ export default function LoginPage() {
               </div>
               <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-background text-muted-foreground px-2">
-                  Or continue with
+                  {dict.login.orContinueWith}
                 </span>
               </div>
             </div>
@@ -186,12 +196,12 @@ export default function LoginPage() {
           </form>
 
           <p className="text-muted-foreground mt-8 text-center text-sm">
-            Don&apos;t have an account?{" "}
+            {dict.login.noAccount}{" "}
             <Link
-              href="/register"
+              href={`/${lang}/register`}
               className="text-primary font-medium hover:underline"
             >
-              Sign up
+              {dict.login.signUp}
             </Link>
           </p>
         </div>

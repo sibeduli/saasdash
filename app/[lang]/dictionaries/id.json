@@ -1,0 +1,22 @@
+{
+  "login": {
+    "title": "Selamat datang kembali",
+    "subtitle": "Masukkan kredensial Anda untuk mengakses akun",
+    "email": "Email",
+    "emailPlaceholder": "nama@contoh.com",
+    "password": "Kata Sandi",
+    "passwordPlaceholder": "••••••••",
+    "forgotPassword": "Lupa kata sandi?",
+    "rememberMe": "Ingat saya selama 30 hari",
+    "signIn": "Masuk",
+    "orContinueWith": "Atau lanjutkan dengan",
+    "noAccount": "Belum punya akun?",
+    "signUp": "Daftar",
+    "testimonial": "Template dashboard ini telah menghemat waktu kerja saya dan membantu saya memberikan panel admin yang menakjubkan kepada klien saya lebih cepat dari sebelumnya.",
+    "testimonialAuthor": "Abdul, Product Designer",
+    "copyright": "© 2026 SaasDash. Hak cipta dilindungi."
+  },
+  "common": {
+    "appName": "SaasDash"
+  }
+}
