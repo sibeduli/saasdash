@@ -1,16 +1,11 @@
-"use client";
-
-import DotField from "@/components/DotField";
+import { DotPattern } from "@/components/dot-pattern";
 
 export function DotFieldBackground() {
   return (
-    <div className="absolute inset-0">
-      <DotField
-        dotRadius={1}
-        dotSpacing={20}
-        gradientFrom="rgba(255,255,255,0.3)"
-        gradientTo="rgba(255,255,255,0.15)"
-      />
-    </div>
+    <DotPattern
+      className="text-primary-foreground/15"
+      dotSize={1}
+      dotSpacing={20}
+    />
   );
 }
