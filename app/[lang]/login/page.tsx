@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LanguageToggle } from "@/components/language-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { getDictionary, hasLocale, type Locale } from "../dictionaries";
 import { DotFieldBackground } from "./login-form";
 
@@ -67,8 +68,9 @@ export default async function LoginPage({
 
       {/* Right side - Login form */}
       <div className="relative flex w-full flex-col justify-center px-8 lg:w-1/2 lg:px-16 xl:px-24">
-        {/* Language toggle */}
-        <div className="absolute top-6 right-6">
+        {/* Language and theme toggles */}
+        <div className="absolute top-6 right-6 flex items-center gap-2">
+          <ThemeToggle />
           <LanguageToggle />
         </div>
 
