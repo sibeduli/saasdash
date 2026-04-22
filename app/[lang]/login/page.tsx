@@ -147,8 +147,8 @@ export default async function LoginPage({
               </div>
             </div>
 
-            <Button type="submit" className="w-full">
-              {dict.login.signIn}
+            <Button type="submit" className="w-full" asChild>
+              <a href={`/${lang}/dashboard`}>{dict.login.signIn}</a>
             </Button>
 
             <div className="relative">

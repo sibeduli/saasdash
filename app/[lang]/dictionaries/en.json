@@ -1,4 +1,44 @@
 {
+  "dashboard": {
+    "welcome": "Welcome back",
+    "subtitle": "Here's what's happening with your account today.",
+    "stats": {
+      "totalUsers": "Total Users",
+      "activeNow": "Active Now",
+      "totalRevenue": "Total Revenue",
+      "pendingTasks": "Pending Tasks"
+    },
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "chartsGraphs": "Charts & Graphs",
+    "reports": "Reports",
+    "metrics": "Metrics",
+    "users": "Users",
+    "products": "Products",
+    "ordersInvoices": "Orders & Invoices",
+    "shipments": "Shipments",
+    "payments": "Payments",
+    "inventory": "Inventory",
+    "orderCart": "Order (Cart)",
+    "orderSingular": "Order (Singular)",
+    "mapPin": "Map and Pin",
+    "payment": "Payment",
+    "qrScanner": "QR Scanner",
+    "uploadingFiles": "Uploading Files",
+    "memberManagement": "Member Management",
+    "taskTracker": "Kanban Board",
+    "supportsTickets": "Supports and Tickets",
+    "roles": "Roles",
+    "toggles": "Toggles",
+    "securityEvents": "Security Events",
+    "activityLogs": "Activity Logs",
+    "downloadableAssets": "Downloadable Assets",
+    "termsConditions": "Terms and Conditions",
+    "logout": "Logout"
+  },
   "login": {
     "title": "Welcome back",
     "subtitle": "Enter your credentials to access your account",

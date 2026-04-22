@@ -1,4 +1,44 @@
 {
+  "dashboard": {
+    "welcome": "Selamat datang kembali",
+    "subtitle": "Berikut yang terjadi dengan akun Anda hari ini.",
+    "stats": {
+      "totalUsers": "Total Pengguna",
+      "activeNow": "Aktif Sekarang",
+      "totalRevenue": "Total Pendapatan",
+      "pendingTasks": "Tugas Tertunda"
+    },
+    "recentActivity": "Aktivitas Terbaru",
+    "quickActions": "Aksi Cepat"
+  },
+  "sidebar": {
+    "dashboard": "Dasbor",
+    "chartsGraphs": "Grafik & Diagram",
+    "reports": "Laporan",
+    "metrics": "Metrik",
+    "users": "Pengguna",
+    "products": "Produk",
+    "ordersInvoices": "Pesanan & Faktur",
+    "shipments": "Pengiriman",
+    "payments": "Pembayaran",
+    "inventory": "Inventaris",
+    "orderCart": "Pesanan (Keranjang)",
+    "orderSingular": "Pesanan (Tunggal)",
+    "mapPin": "Peta dan Pin",
+    "payment": "Pembayaran",
+    "qrScanner": "Pemindai QR",
+    "uploadingFiles": "Unggah File",
+    "memberManagement": "Manajemen Anggota",
+    "taskTracker": "Papan Kanban",
+    "supportsTickets": "Dukungan dan Tiket",
+    "roles": "Peran",
+    "toggles": "Sakelar",
+    "securityEvents": "Peristiwa Keamanan",
+    "activityLogs": "Log Aktivitas",
+    "downloadableAssets": "Aset Unduhan",
+    "termsConditions": "Syarat dan Ketentuan",
+    "logout": "Keluar"
+  },
   "login": {
     "title": "Selamat datang kembali",
     "subtitle": "Masukkan kredensial Anda untuk mengakses akun",
