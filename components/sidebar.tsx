@@ -4,6 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   LayoutDashboard,
   Users,
   Package,
@@ -251,12 +256,12 @@ export function Sidebar({ lang, dict }: SidebarProps) {
                   const label =
                     dict.sidebar[item.key as keyof typeof dict.sidebar] ||
                     item.key;
-                  return (
+                  const linkContent = (
                     <Link
-                      key={item.key}
                       href={`/${lang}${item.href}`}
                       className={cn(
-                        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                        "flex items-center rounded-lg py-2 text-sm font-medium transition-colors",
+                        collapsed ? "justify-center px-2" : "gap-3 px-3",
                         isActive(item.href)
                           ? "bg-primary text-primary-foreground"
                           : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
@@ -266,6 +271,19 @@ export function Sidebar({ lang, dict }: SidebarProps) {
                       {!collapsed && <span>{label}</span>}
                     </Link>
                   );
+
+                  if (collapsed) {
+                    return (
+                      <Tooltip key={item.key}>
+                        <TooltipTrigger asChild>{linkContent}</TooltipTrigger>
+                        <TooltipContent side="right">
+                          <p>{label}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    );
+                  }
+
+                  return <div key={item.key}>{linkContent}</div>;
                 })}
               </div>
             )}
@@ -275,13 +293,29 @@ export function Sidebar({ lang, dict }: SidebarProps) {
 
       {/* Logout */}
       <div className="border-border space-y-1 border-t p-2">
-        <Link
-          href={`/${lang}/login`}
-          className="text-muted-foreground hover:bg-destructive hover:text-destructive-foreground flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
-        >
-          <LogOut className="h-5 w-5 shrink-0" />
-          {!collapsed && <span>{dict.sidebar.logout}</span>}
-        </Link>
+        {collapsed ? (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href={`/${lang}/login`}
+                className="text-muted-foreground hover:bg-destructive hover:text-destructive-foreground flex items-center justify-center rounded-lg px-2 py-2 text-sm font-medium transition-colors"
+              >
+                <LogOut className="h-5 w-5 shrink-0" />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>{dict.sidebar.logout}</p>
+            </TooltipContent>
+          </Tooltip>
+        ) : (
+          <Link
+            href={`/${lang}/login`}
+            className="text-muted-foreground hover:bg-destructive hover:text-destructive-foreground flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+          >
+            <LogOut className="h-5 w-5 shrink-0" />
+            <span>{dict.sidebar.logout}</span>
+          </Link>
+        )}
       </div>
     </aside>
   );

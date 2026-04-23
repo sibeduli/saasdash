@@ -58,5 +58,17 @@
   },
   "common": {
     "appName": "SaasDash"
+  },
+  "commandMenu": {
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found.",
+    "navigation": "Navigation",
+    "theme": "Theme",
+    "language": "Language",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "english": "English",
+    "indonesian": "Indonesian"
   }
 }

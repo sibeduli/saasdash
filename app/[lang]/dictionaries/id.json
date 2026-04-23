@@ -58,5 +58,17 @@
   },
   "common": {
     "appName": "SaasDash"
+  },
+  "commandMenu": {
+    "placeholder": "Ketik perintah atau cari...",
+    "noResults": "Tidak ada hasil.",
+    "navigation": "Navigasi",
+    "theme": "Tema",
+    "language": "Bahasa",
+    "light": "Terang",
+    "dark": "Gelap",
+    "system": "Sistem",
+    "english": "Inggris",
+    "indonesian": "Indonesia"
   }
 }
