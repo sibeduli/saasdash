@@ -1,7 +1,17 @@
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale, type Locale } from "../dictionaries";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Activity, DollarSign, Clock } from "lucide-react";
+import { RecentItemsCard } from "@/components/recent-items-card";
+import { StatsChartCard } from "@/components/stats-chart-card";
+import { StatsProgressCard } from "@/components/stats-progress-card";
+import {
+  Users,
+  Activity,
+  DollarSign,
+  ShoppingCart,
+  User,
+  Clock,
+} from "lucide-react";
 
 export default async function DashboardPage({
   params,
@@ -15,33 +25,6 @@ export default async function DashboardPage({
   }
 
   const dict = await getDictionary(lang as Locale);
-
-  const stats = [
-    {
-      title: dict.dashboard.stats.totalUsers,
-      value: "2,847",
-      change: "+12.5%",
-      icon: Users,
-    },
-    {
-      title: dict.dashboard.stats.activeNow,
-      value: "147",
-      change: "+3.2%",
-      icon: Activity,
-    },
-    {
-      title: dict.dashboard.stats.totalRevenue,
-      value: "$48,352",
-      change: "+8.1%",
-      icon: DollarSign,
-    },
-    {
-      title: dict.dashboard.stats.pendingTasks,
-      value: "23",
-      change: "-2.4%",
-      icon: Clock,
-    },
-  ];
 
   const recentActivity = [
     {
@@ -76,6 +59,57 @@ export default async function DashboardPage({
     },
   ];
 
+  const recentOrders = [
+    {
+      id: "ORD-001",
+      icon: <ShoppingCart className="h-5 w-5" />,
+      title: "Order #12847",
+      subtitle: "John Doe • 3 items",
+      timestamp: "2 Mar",
+      badge: { label: "Paid", variant: "default" as const },
+    },
+    {
+      id: "ORD-002",
+      icon: <ShoppingCart className="h-5 w-5" />,
+      title: "Order #12846",
+      subtitle: "Jane Smith • 1 item",
+      timestamp: "1 Mar",
+      badge: { label: "Pending", variant: "secondary" as const },
+    },
+    {
+      id: "ORD-003",
+      icon: <ShoppingCart className="h-5 w-5" />,
+      title: "Order #12845",
+      subtitle: "Bob Johnson • 5 items",
+      timestamp: "28 Feb",
+      badge: { label: "Shipped", variant: "outline" as const },
+    },
+  ];
+
+  const recentUsers = [
+    {
+      id: "USR-001",
+      icon: <User className="h-5 w-5" />,
+      title: "Sarah Connor",
+      subtitle: "sarah@example.com",
+      timestamp: "Today",
+    },
+    {
+      id: "USR-002",
+      icon: <User className="h-5 w-5" />,
+      title: "Mike Ross",
+      subtitle: "mike@example.com",
+      timestamp: "Yesterday",
+    },
+    {
+      id: "USR-003",
+      icon: <User className="h-5 w-5" />,
+      title: "Emma Watson",
+      subtitle: "emma@example.com",
+      timestamp: "3 days ago",
+    },
+  ];
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -86,28 +120,73 @@ export default async function DashboardPage({
 
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => {
-          const Icon = stat.icon;
-          const isPositive = stat.change.startsWith("+");
-          return (
-            <Card key={stat.title}>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-muted-foreground text-sm font-medium">
-                  {stat.title}
-                </CardTitle>
-                <Icon className="text-muted-foreground h-4 w-4" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stat.value}</div>
-                <p
-                  className={`text-xs ${isPositive ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
-                >
-                  {stat.change} from last month
-                </p>
-              </CardContent>
-            </Card>
-          );
-        })}
+        <StatsChartCard
+          title={dict.dashboard.stats.totalUsers}
+          value="2,847"
+          change="+12.5%"
+          changeLabel="vs yesterday"
+          data={[
+            { value: 20 },
+            { value: 35 },
+            { value: 28 },
+            { value: 45 },
+            { value: 38 },
+            { value: 55 },
+            { value: 48 },
+            { value: 62 },
+          ]}
+        />
+        <StatsChartCard
+          title={dict.dashboard.stats.activeNow}
+          value="147"
+          change="+3.2%"
+          changeLabel="vs yesterday"
+          variant="text"
+          data={[
+            { value: 80 },
+            { value: 95 },
+            { value: 70 },
+            { value: 120 },
+            { value: 100 },
+            { value: 130 },
+            { value: 110 },
+            { value: 147 },
+          ]}
+        />
+        <Card>
+          <CardContent className="pt-6">
+            <p className="text-muted-foreground text-sm font-medium">
+              {dict.dashboard.stats.totalRevenue}
+            </p>
+            <p className="mt-1 text-3xl font-bold">$48,352</p>
+          </CardContent>
+        </Card>
+        <StatsProgressCard
+          title={dict.dashboard.stats.pendingTasks}
+          value={6}
+          total={23}
+          label="6 completed today"
+        />
+      </div>
+
+      {/* Recent Items Cards */}
+      <div className="grid gap-4 lg:grid-cols-2">
+        <RecentItemsCard
+          title={dict.dashboard.recentOrders.title}
+          subtitle={dict.dashboard.recentOrders.subtitle}
+          viewAllHref={`/${lang}/dashboard/orders-invoices`}
+          viewAllLabel={dict.dashboard.viewAll}
+          items={recentOrders}
+          emptyMessage={dict.dashboard.recentOrders.empty}
+        />
+        <RecentItemsCard
+          title={dict.dashboard.recentUsers.title}
+          subtitle={dict.dashboard.recentUsers.subtitle}
+          viewAllHref={`/${lang}/dashboard/users`}
+          viewAllLabel={dict.dashboard.viewAll}
+          items={recentUsers}
+          emptyMessage={dict.dashboard.recentUsers.empty}
+        />
       </div>
 
       {/* Recent Activity */}

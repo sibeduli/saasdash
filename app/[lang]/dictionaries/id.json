@@ -9,7 +9,18 @@
       "pendingTasks": "Tugas Tertunda"
     },
     "recentActivity": "Aktivitas Terbaru",
-    "quickActions": "Aksi Cepat"
+    "quickActions": "Aksi Cepat",
+    "viewAll": "Lihat semua",
+    "recentOrders": {
+      "title": "Pesanan Terbaru",
+      "subtitle": "3 pesanan terakhir",
+      "empty": "Belum ada pesanan"
+    },
+    "recentUsers": {
+      "title": "Pengguna Terbaru",
+      "subtitle": "3 pengguna terakhir terdaftar",
+      "empty": "Belum ada pengguna"
+    }
   },
   "sidebar": {
     "dashboard": "Dasbor",

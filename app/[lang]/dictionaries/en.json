@@ -9,7 +9,18 @@
       "pendingTasks": "Pending Tasks"
     },
     "recentActivity": "Recent Activity",
-    "quickActions": "Quick Actions"
+    "quickActions": "Quick Actions",
+    "viewAll": "View all",
+    "recentOrders": {
+      "title": "Recent Orders",
+      "subtitle": "Last 3 orders placed",
+      "empty": "No orders yet"
+    },
+    "recentUsers": {
+      "title": "Recent Users",
+      "subtitle": "Last 3 users registered",
+      "empty": "No users yet"
+    }
   },
   "sidebar": {
     "dashboard": "Dashboard",
